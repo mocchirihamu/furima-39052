@@ -6,14 +6,13 @@
 | ------------------ | ------ | ------------------------- |
 | nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
-| password           | string | null: false               |
+| encrypted_password | string | null: false               |
 | family_name        | string | null: false               |
-| first _name        | string | null: false               |
+| first_name         | string | null: false               |
 | family_name_kana   | string | null: false               |
 | first_name_kana    | string | null: false               |
-| birth_year         | string | null: false               |
-| birth_month        | string | null: false               |
-| birth_day          | string | null: false               |
+| birthday           | date   | null: false               |
+
 
 ### Association
 
@@ -23,17 +22,17 @@
 
 ## items テーブル
 
-| Column          | Type       | Options                        |
-| ------------    | ---------- | ------------------------------ |
-| name            | string     | null: false                    |
-| text            | text       | null: false                    |
-| category        | string     | null: false                    |
-| condition       | string     | null: false                    |
-| delivery_charge | string     | null: false                    |
-| area            | string     | null: false                    |
-| shipping_date   | string     | null: false                    |
-| price           | string     | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| name               | string     | null: false                    |
+| detail             | text       | null: false                    |
+| category_id        | string     | null: false                    |
+| condition_id       | string     | null: false                    |
+| delivery_charge_id | string     | null: false                    |
+| prefecture_id      | string     | null: false                    |
+| shipping_date_id   | string     | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
  
 
 ### Association
@@ -57,14 +56,14 @@
 
 ## addresses テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| postcode     | string     | null: false                    |
-| prefecture   | string     | null: false                    |
-| city         | string     | null: false                    |
-| address1     | text       | null: false                    |
-| address2     | text       | null: false                    |
-| telephone    | string     | null: false                    |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postcode      | string     | null: false                    |
+| prefecture_id | string     | null: false                    |
+| city          | string     | null: false                    |
+| address1      | string     | null: false                    |
+| address2      | string     |null: false                    |
+| telephone     | string     | null: false                    |
 | order         | references | null: false, foreign_key: true |
 
 ### Association
