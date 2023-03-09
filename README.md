@@ -26,11 +26,11 @@
 | ------------------ | ---------- | ------------------------------ |
 | name               | string     | null: false                    |
 | detail             | text       | null: false                    |
-| category_id        | string     | null: false                    |
-| condition_id       | string     | null: false                    |
-| delivery_charge_id | string     | null: false                    |
-| prefecture_id      | string     | null: false                    |
-| shipping_date_id   | string     | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| shipping_date_id   | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
  
@@ -44,8 +44,9 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| item         | references | null: false, foreign_key: true |
 | user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
+
 
 ### Association
 
@@ -59,10 +60,10 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postcode      | string     | null: false                    |
-| prefecture_id | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | address1      | string     | null: false                    |
-| address2      | string     |null: false                    |
+| address2      | string     |                                |
 | telephone     | string     | null: false                    |
 | order         | references | null: false, foreign_key: true |
 
