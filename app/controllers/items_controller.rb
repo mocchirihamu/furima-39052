@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
   end
 
   def contributor_confirmation
-    return if user_signed_in? && current_user.id == @item.user_id
+    return if current_user.id == @item.user_id
 
     redirect_to root_path
   end
