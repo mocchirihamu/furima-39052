@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit] 
-  before_action :set_item, only: [:show, :edit ,:update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
   def index
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
       render :new
     end
   end
-  
+
   def show
   end
 
@@ -36,16 +36,17 @@ class ItemsController < ApplicationController
 
   def destroy
     if @item.destroy
-    redirect_to root_path
+      redirect_to root_path
     else
-    redirect_to root_path
+      redirect_to root_path
     end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:name, :detail, :category_id, :condition_id, :delivery_charge_id, :prefecture_id, :shopping_date_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :detail, :category_id, :condition_id, :delivery_charge_id, :prefecture_id,
+                                 :shopping_date_id, :price, :image).merge(user_id: current_user.id)
   end
 
   def set_item
@@ -53,8 +54,8 @@ class ItemsController < ApplicationController
   end
 
   def contributor_confirmation
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    return if user_signed_in? && current_user.id == @item.user_id
+
+    redirect_to root_path
   end
 end
