@@ -5,11 +5,11 @@ class OrderAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :postcode, format: { with: /\A\d{3}[-]\d{4}\z/, message: "can't be blank" }
+    validates :postcode, format: { with: /\A\d{3}[-]\d{4}\z/, message: "is invalid" }
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city
     validates :address1
-    validates :telephone, format: { with: /\A\d{10,11}\z/, message: "can't be blank" }
+    validates :telephone, format: { with: /\A\d{10,11}\z/, message: "is invalid" }
   end
 
   def save
