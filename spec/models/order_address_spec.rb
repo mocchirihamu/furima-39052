@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order_address = FactoryBot.build(:order_address)
+    item = FactoryBot.create(:item)
+    user = FactoryBot.create(:user)
+    @order_address = FactoryBot.build(:order_address, item_id: item.id, user_id: user.id)
   end
 
   context '商品が購入できる場合' do
@@ -61,10 +63,25 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include('Telephone is invalid')
     end
+    it '電話番号が9桁以下だと購入できないこと' do
+      @order_address.telephone = '080123456'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include('Telephone is invalid')
+    end
     it 'トークンが空では購入できない' do
       @order_address.token = nil
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Token can't be blank")
+    end
+    it 'userが紐付いていなければ購入できない' do
+      @order_address.user_id = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("User can't be blank")
+    end
+    it 'itemが紐付いていなければ購入できない' do
+      @order_address.item_id = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
